@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aplikasi Panen Sawit</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/757/757326.png" type="image/png">
+  <style>
+
+ body {
+      background-image: url('https://images.unsplash.com/photo-1609710228159-d986b212fc8f');
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    /* Carousel melayang dengan border transparan */
+.carousel-float {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  transform: translateY(10px);
+}
+
+/* Fitur card - ubah tampilan */
+.feature-card {
+  border: none;
+  text-align: center;
+  margin-bottom: 15px;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.feature-card img {
+  border: 2px solid #2d6a4f;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 50px;
+  background-color: white;
+}
+
+.feature-card h5 {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #2d6a4f;
+}
+
+    }
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #2d6a4f;
+    }
+    .dropdown-menu-end {
+      right: 0;
+      left: auto;
+    }
+    .card {
+      border-radius: 12px;
+      transition: 0.3s ease-in-out;
+    }
+    .feature-card {
+      border:none
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 15px;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-card:hover {
+      background-color: #e6f4ea;
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+    .feature-card img {
+      max-width: 50px;
+      margin-bottom: 10px;
+    }
+    .footer {
+      background-color: #2d6a4f;
+      color: #ffffff;
+      padding: 40px 0;
+    }
+    .footer .btn-link {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .footer .btn-link:hover {
+      text-decoration: underline;
+    }
+    .footer .section-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    .footer .footer-menu a {
+      color: #ffffff;
+      margin: 0 10px;
+    }
+    .footer .footer-menu a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 576px) {
+      .card {
+        padding: 20px;
+      }
+      .footer {
+        padding: 20px 0;
+      }
+      .footer .section-title {
+        font-size: 16px;
+      }
+      .navbar-brand {
+        font-size: 20px;
+      }
+      .container {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .feature-card h5 {
+        font-size: 14px;
+      }
+      .feature-card img {
+        max-width: 40px;
+      }
+      .footer .footer-menu {
+        text-align: center;
+      }
+      .footer .footer-menu a {
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5" id="loginPage">
+  <div class="text-center">
+    <h1 class="mb-4" style="font-size: 80px; color: #2d6a4f;">🌿</h1>
+    <h3 class="text-center mb-4" style="color: #2d6a4f;">SawitApp</h3>
+  </div>
+  <div class="card overlay p-4 mx-auto" style="max-width: 400px;">
+    <h3 class="text-center">Login</h3>
+    <input type="email" id="loginEmail" class="form-control my-2" placeholder="Email">
+    <input type="password" id="loginPassword" class="form-control my-2" placeholder="Password">
+    <button class="btn btn-success w-100 my-2" onclick="showHome()">Login</button>
+    <p class="text-center">Belum punya akun? <a href="#" onclick="showSignUp()">Daftar</a></p>
+  </div>
+</div>
+
+<div class="container-fluid d-none" id="homePage">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+    <a class="navbar-brand" href="#">🌿 SawitApp</a>
+    <div class="ms-auto dropdown">
+      <button class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">⋮</button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="#">Profil</a></li>
+        <li><a class="dropdown-item" href="#">Edit Profil</a></li>
+        <li><a class="dropdown-item" href="#">Tentang Aplikasi</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- After the loginPage -->
+  <div id="carouselExample" class="carousel slide mt-4">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="1.png" class="d-block w-100" alt="Promo 1">
+      </div>
+      <div class="carousel-item">
+        <img src="GoBiz-CTA-Banner-1-Top-1.png" class="d-block w-100" alt="Promo 2">
+      </div>
+      <div class="carousel-item">
+        <img src="2.png" class="d-block w-100" alt="Promo 3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+  
+  <!-- Section Fitur -->
+  <div class="container mt-4">
+    <h3>Fitur Utama</h3>
+    <div class="row">
+      <div class="col-4">
+        <div class="card feature-card" onclick="showSimulasiPanen()">
+          <img src="https://cdn-icons-png.flaticon.com/512/3082/3082572.png" alt="simulasi panen">
+          <h5>Simulasi Panen</h5>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card feature-card" onclick="alert('Riwayat Panen akan dikembangkan')">
+          <img src="https://cdn-icons-png.flaticon.com/512/2520/2520420.png" alt="riwayat panen">
+          <h5>Riwayat Panen</h5>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card feature-card" onclick="alert('Grafik Panen akan dikembangkan')">
+          <img src="https://cdn-icons-png.flaticon.com/512/3544/3544007.png" alt="grafik panen">
+          <h5>Grafik Hasil</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Berita -->
+  <div class="container mt-4">
+    <h3>Berita Terbaru</h3>
+    <div class="row">
+      <!-- Berita 1 -->
+      <div class="col-12 col-md-4 mb-4">
+        <div class="card">
+          <img src="berita1.jpg" class="card-img-top" alt="Harga TBS Sawit">
+          <div class="card-body">
+            <h5 class="card-title">Harga TBS Sawit Sumut Periode 10-15 April 2025 Turun Tipis</h5>
+            <a href="https://www.infosawit.com/2025/04/11/harga-tbs-sawit-sumut-periode-10-15-april-2025-turun-tipis/" class="btn btn-link">Baca Selengkapnya</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Berita 2 -->
+      <div class="col-12 col-md-4 mb-4">
+        <div class="card">
+          <img src="berita2.jpg" class="card-img-top" alt="Harga TBS Sawit">
+          <div class="card-body">
+            <h5 class="card-title">Mendag Targetkan Pekan Ini Harga TBS Sawit di Atas Rp 2.000, Faktanya Masih...</h5>
+            <a href="https://regional.kompas.com/read/2022/08/08/121712778/mendag-targetkan-pekan-ini-harga-tbs-sawit-di-atas-rp-2000-faktanya-masih" class="btn btn-link">Baca Selengkapnya</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Berita 3 -->
+      <div class="col-12 col-md-4 mb-4">
+        <div class="card">
+          <img src="berita3.webp" class="card-img-top" alt="PGN Olah POME di Sumsel">
+          <div class="card-body">
+            <h5 class="card-title">Produsen Terbesar Minyak Sawit PGN Berpotensi Olah POME di Sumsel Wujudkan NZE 2060</h5>
+            <a href="https://www.liputan6.com/regional/read/5970531/produsen-terbesar-minyak-sawit-pgn-berpotensi-olah-pome-di-sumsel-wujudkan-nze-2060" class="btn btn-link">Baca Selengkapnya</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Simulasi Panen -->
+<div class="container-fluid d-none" id="simulasiPanenPage">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+    <a class="navbar-brand" href="#">🌿 SawitApp</a>
+    <button class="btn btn-link" onclick="backToHomePage()">Kembali</button>
+  </nav>
+
+  <div class="container mt-4">
+    <h3>Simulasi Panen</h3>
+    <form id="simulasiForm">
+      <div class="mb-3">
+        <label for="tanggalMulai" class="form-label">Tanggal Mulai Tanam</label>
+        <input type="date" id="tanggalMulai" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="luasLahan" class="form-label">Luas Lahan (Hektar)</label>
+        <input type="number" id="luasLahan" class="form-control" placeholder="Luas Lahan (Hektar)" required>
+      </div>
+      <div class="mb-3">
+        <label for="jumlahSawit" class="form-label">Jumlah Pohon Sawit</label>
+        <input type="number" id="jumlahSawit" class="form-control" placeholder="Jumlah Pohon Sawit" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Hitung Simulasi</button>
+    </form>
+    <div id="hasilSimulasi" class="mt-4"></div>
+  </div>
+</div>
+
+<!-- Grafik Panen -->
+<div class="container-fluid d-none" id="grafikPanenPage">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+    <a class="navbar-brand" href="#">🌿 SawitApp</a>
+    <button class="btn btn-link" onclick="backToHomePage()">Kembali</button>
+  </nav>
+
+  <div class="container mt-4">
+    <h3>Grafik Panen</h3>
+    <canvas id="grafikCanvas"></canvas>
+    <script>
+      var ctx = document.getElementById('grafikCanvas').getContext('2d');
+      var grafikPanen = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+          datasets: [{
+            label: 'Jumlah TBS Sawit',
+            data: [200, 450, 300, 500, 600, 550, 700],
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            tension: 0.1
+          }]
+        }
+      });
+    </script>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="container-fluid footer pt-5 mt-5">
+    <div class="container py-5">
+      <div class="row g-5">
+        <div class="col-lg-3 col-md-6">
+          <h4 class="section-title mb-4">Company</h4>
+          <a class="btn btn-link text-light" href="#">Tentang Kami</a>
+          <a class="btn btn-link text-light" href="#">Kontak Kami</a>
+          <a class="btn btn-link text-light" href="#">Kebijakan Privasi</a>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h4 class="section-title mb-4">Link</h4>
+          <a class="btn btn-link text-light" href="#">Facebook</a>
+          <a class="btn btn-link text-light" href="#">Instagram</a>
+          <a class="btn btn-link text-light" href="#">Help</a>
+          <a class="btn btn-link text-light" href="#">FAQ</a>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h4 class="section-title mb-4">Contact Us</h4>
+          <p class="text-light mb-0">Email: gldvlr12@gmail.com</p>
+          <p class="text-light mb-0">Telepon: 0800-123-456</p>
+        </div>
+          <div class="position-relative mx-auto" style="max-width: 500px;">
+                <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your Messege">
+                <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Send</button>
+            </div>
+        </div>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  function showHome() {
+    document.getElementById('loginPage').classList.add('d-none');
+    document.getElementById('homePage').classList.remove('d-none');
+  }
+
+  function showSignUp() {
+    alert('Halaman pendaftaran akan dikembangkan');
+  }
+
+  function logout() {
+    document.getElementById('homePage').classList.add('d-none');
+    document.getElementById('loginPage').classList.remove('d-none');
+  }
+
+  function showSimulasiPanen() {
+    document.getElementById('homePage').classList.add('d-none');
+    document.getElementById('simulasiPanenPage').classList.remove('d-none');
+  }
+
+  function backToHomePage() {
+    document.getElementById('simulasiPanenPage').classList.add('d-none');
+    document.getElementById('grafikPanenPage').classList.add('d-none');
+    document.getElementById('homePage').classList.remove('d-none');
+  }
+
+  document.getElementById('simulasiForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var tanggalMulai = document.getElementById('tanggalMulai').value;
+    var luasLahan = document.getElementById('luasLahan').value;
+    var jumlahSawit = document.getElementById('jumlahSawit').value;
+    var hasilSimulasi = `
+      <h4>Hasil Simulasi Panen:</h4>
+      <p><strong>Tanggal Mulai Tanam:</strong> ${tanggalMulai}</p>
+      <p><strong>Luas Lahan:</strong> ${luasLahan} Hektar</p>
+      <p><strong>Jumlah Pohon Sawit:</strong> ${jumlahSawit}</p>
+      <p><strong>Estimasi Panen:</strong> 6 bulan setelah tanam untuk menghasilkan TBS pertama.</p>
+    `;
+    document.getElementById('hasilSimulasi').innerHTML = hasilSimulasi;
+  });
+</script>
+
+</body>
+</html>
